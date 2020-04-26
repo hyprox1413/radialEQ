@@ -17,14 +17,11 @@ void queueAdd() {
 }
 
 void playSong() {
-  try{  
-    song = new SoundFile(this, "music/" + songQueue.get(songPlaying).getName());
-  } catch (IndexOutOfBoundsException e) {
-    queueAdd();
-    songPlaying = 0;
-    song = new SoundFile(this, "music/" + songQueue.get(songPlaying).getName());
-  }
+  song = new SoundFile(stellarEQ.this, "music/" + songQueue.get(songPlaying).getName(), false);
+  println("Loaded!"); //<>//
   song.play();
+  fft = new FFT(this, bands);
+  amplitude = new Amplitude(this);
   fft.input(song);
   amplitude.input(song);
   framesPlayed = 0;
